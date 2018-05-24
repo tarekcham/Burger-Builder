@@ -1,26 +1,27 @@
-import React from 'react';
-import BuildControl from './BuildControl/BuildControl';
+import React from "react";
+import BuildControl from "./BuildControl/BuildControl";
 
-import classes from './BuildControls.css'
+import classes from "./BuildControls.css";
 
 const controls = [
-	{ label: 'Salad', type: 'salad'},
-	{ label: 'Bacon', type: 'bacon'},
-	{ label: 'Cheese', type: 'cheese'},
-	{ label: 'Meat', type: 'meat'}
-
+	{ label: "Salad", type: "salad" },
+	{ label: "Bacon", type: "bacon" },
+	{ label: "Cheese", type: "cheese" },
+	{ label: "Meat", type: "meat" }
 ];
 
-
-const buildControls = (props) => (
+const buildControls = props => (
 	<div className={classes.BuildControls}>
-
 		{controls.map(ctrl => (
-			<BuildControl key={ctrl.label} label={ctrl.label} />
-			) )}
-
+			<BuildControl
+				added={() => props.ingredientAdded(ctrl.type)}
+				key={ctrl.label}
+				label={ctrl.label}
+				removed={()=> props.ingredientDelete(ctrl.type)}
+				disabled={props.disabled[ctrl.type]}
+			/>
+		))}
 	</div>
-
 );
 
 export default buildControls;
