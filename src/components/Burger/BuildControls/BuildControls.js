@@ -1,5 +1,6 @@
 import React from "react";
 import BuildControl from "./BuildControl/BuildControl";
+import { formatPrice } from '../../../helpers.js'
 
 import classes from "./BuildControls.css";
 
@@ -12,6 +13,7 @@ const controls = [
 
 const buildControls = props => (
 	<div className={classes.BuildControls}>
+	<p><strong>Current Price: {props.price.toFixed(2)}</strong></p>
 		{controls.map(ctrl => (
 			<BuildControl
 				added={() => props.ingredientAdded(ctrl.type)}
