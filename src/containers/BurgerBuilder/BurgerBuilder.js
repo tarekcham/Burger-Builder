@@ -78,9 +78,12 @@ export default class BurgerBuilder extends Component {
 	};
 
 	purchaseCancelHandler = () => {
-		this.setState({purchasing: false});
+		this.setState({ purchasing: false });
+	};
 
-	}
+	purschaseContinueHandler = () => {
+		alert("You continue!");
+	};
 
 	render() {
 		const disabledInfo = {
@@ -89,14 +92,20 @@ export default class BurgerBuilder extends Component {
 		for (let key in disabledInfo) {
 			disabledInfo[key] = disabledInfo[key] <= 0;
 		}
-		
+
 		return (
 			<Fragment>
-				<Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+				<Modal
+					show={this.state.purchasing}
+					modalClosed={this.purchaseCancelHandler}
+				>
 					<OrderSummary
 						purchasing={this.state.purchasing}
 						ingredients={this.state.ingredients}
-					/>{" "}
+						price={this.state.totalPrice}
+						purchaseCancelled={this.purchaseCancelHandler}
+						purchaseContinued={this.purschaseContinueHandler}
+					/>
 				</Modal>
 				<Burger ingredients={this.state.ingredients} />
 				<BuildControls
